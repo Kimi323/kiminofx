@@ -1,0 +1,61 @@
+
+create mongo-data folder to save data in Users/kimi
+KiminoMacBook-Pro:bin kimi$ ./mongod --dbpath ~/mongo-data
+
+use mongoshell
+open another terminal and type mongo
+>use {dbname}
+>db.trades.insertOne({
+  "_id": 1,
+  "currencyPair": "GBP/JPY",
+  "amount": 5000,
+  "entryPrice": 149.37,
+  "exitPrice": 149.90,
+  "entryDate": "2018/05/02",
+  "exitDate": "2018/05/02",
+  "success": false
+})
+we will get
+{ "acknowledged" : true, "insertedId" : 1 }
+which means document is inserted successfully.
+
+list all documents
+> db.trades.find().pretty()
+{
+	"_id" : 1,
+	"currencyPair" : "GBP/JPY",
+	"amount" : 5000,
+	"entryPrice" : 149.37,
+	"exitPrice" : 149.9,
+	"entryDate" : "2018/05/02",
+	"exitDate" : "2018/05/02",
+	"success" : false
+}
+
+show documents match constrains only GBP/JPY
+> db.trades.find({"currencyPair": "GBP/JPY"}).pretty()
+
+KiminoMacBook-Pro:kiminofx kimi$ npm init
+this will create a file called package.json uder your root folder.
+package.json will look like this
+{
+  "name": "kiminofx",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kimi",
+  "license": "ISC"
+}
+
+install nodemon globally
+npm install nodemon -g
+
+5/20
+get user input from client side
+send input to server using ajax POST
+server receive data and insert into mongodb
+mongodb send back data to client side
+client side list data in table

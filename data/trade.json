@@ -1,0 +1,9 @@
+{
+  "currencyPair": "GBP/JPY",
+  "amount": 5000,
+  "entryPrice": 149.37,
+  "exitPrice": 149.90,
+  "entryDate": "2018/05/02",
+  "exitDate": "2018/05/02",
+  "success": false
+}
