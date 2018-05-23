@@ -1,21 +1,30 @@
 //const MongoClient = require('mongodb').MongoClient;
-const {MongoClient, ObjectID} = require('mongodb');
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
 
-// var obj = new ObjectID();
-// console.log(obj);
+app.use(bodyParser.urlencoded({extended: true}) );
+app.use(bodyParser.json());
+app.use('/html', express.static('html'));
 
 MongoClient.connect('mongodb://localhost:27017/fx', function(err, client) {
     if (err) {
-      return console.log('Unable to connect to MongoDB server');
+        return console.log('Unable to connect to MongoDB server');
     }
     console.log('successfully connect to server');
-    const db = client.db('fx');
-    //find data matches query which should be passed from client side
-    let query = {"success": false}
-    db.collection('trades').find(query).toArray().then((docs) => {
-        console.log(JSON.stringify(docs, undefined, 2));
-    }, (err) => {
-        console.log('unable to fetch trades', err);
-    });
-    client.close();
+    app.get('/trade', (req, res) => {
+        res.send(`<h1>Hello world</h1>`);
+        const db = client.db('fx');
+        db.collection('trades').find({}).toArray().then((docs) => {
+            console.log(JSON.stringify(docs, undefined, 2));
+        }, (err) => {
+            console.log('unable to fetch trades', err);
+        });
+        var server = app.listen(3000, function() {
+            var port = server.address().port;
+            console.log('Express server listening on port %s.', port);
+        });
+    })
+    //client.close();
 });

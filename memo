@@ -59,3 +59,30 @@ send input to server using ajax POST
 server receive data and insert into mongodb
 mongodb send back data to client side
 client side list data in table
+
+KiminoMacBook-Pro:kiminofx kimi$ ls -al ~/.ssh
+total 8
+drwx------   3 kimi  staff   96  5 21 00:50 .
+drwxr-xr-x+ 28 kimi  staff  896  5 21 00:50 ..
+-rw-r--r--   1 kimi  staff  407  5 21 00:50 known_hosts
+KiminoMacBook-Pro:kiminofx kimi$ ssh-keygen -t rsa -b 4096 -C 'your@mail'
+will generate a key for you
+
+KiminoMacBook-Pro:kiminofx kimi$ ls -al ~/.ssh
+total 24
+drwx------   5 kimi  staff   160  5 21 00:57 .
+drwxr-xr-x+ 28 kimi  staff   896  5 21 00:50 ..
+-rw-------   1 kimi  staff  3243  5 21 00:57 id_rsa
+-rw-r--r--   1 kimi  staff   752  5 21 00:57 id_rsa.pub
+-rw-r--r--   1 kimi  staff   407  5 21 00:50 known_hosts
+
+add key to ./ssh
+$ ssh-add ~/.ssh/id_rsa
+Identity added: /Users/kimi/.ssh/id_rsa (/Users/kimi/.ssh/id_rsa)
+
+copy public key to the clip board and paste it in github website add new ssh key page
+pbcopy < ~/.ssh/id_rsa.pub
+
+test ssh connection with github
+$ ssh -T git@github.com
+Hi Kimi323! You've successfully authenticated, but GitHub does not provide shell access.
