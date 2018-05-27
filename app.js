@@ -20,10 +20,10 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
     app.get('/trade', (req, res) => {
         const db = client.db('fx');
         db.collection('trades').find({}).toArray().then((docs) => {
-            res.send(docs);
-            // res.render('trade.hbs', {
-            //   monthlyResult: docs[0].amount
-            // });
+            //res.send(`<h1>${docs.amount}</h1>`);
+            res.render('trade.hbs', {
+                monthlyResult: docs
+            });
         }, (err) => {
             console.log('unable to fetch trades', err);
         });
