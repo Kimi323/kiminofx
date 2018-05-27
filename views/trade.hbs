@@ -13,9 +13,45 @@
   <body>
     <div>
       <h1>Monthly Result</h1>
-    </div>    
+    </div>
+    <div id="input-area">
+      <h2>Trade Log</h2>
+      <form class="form-inline">
+        <lable>currency pair</lable>
+        <input type="text"></input>
+        <lable>Amount</lable>
+        <input type="number"></input>
+        <lable>Entry Price</lable>
+        <input type="number"></input>
+        <lable>Exit Price</lable>
+        <input type="number"></input>
+        <lable>Entry Date</lable>
+        <input type="number"></input>
+        <lable>Exit Date</lable>
+        <input type="number"></input>
+        <lable>target price</lable>
+        <input type="number"></input>
+        <lable>profit if win</lable>
+        <input type="number"></input>
+        <lable>損切</lable>
+        <input type="number"></input>
+        <lable>Loss if Failed</lable>
+        <input type="number"></input>
+      </form>
+    </div>
+    <button>button</button>
     <div>
       <table class="table table-striped" id="monthly-result-list">
+        <tr>
+          <td>Currency Pair</td>
+          <td>Amount</td>
+          <td>Entry Price</td>
+          <td>Exit Price</td>
+          <td>Entry Date</td>
+          <td>Exit Date</td>
+          <td>Result</td>
+          <td>Success/fail</td>
+        </tr>
         {{#each monthlyResult}}
         <tr>
           <td>{{currencyPair}}</td>
@@ -24,6 +60,7 @@
           <td>{{exitPrice}}</td>
           <td>{{entryDate}}</td>
           <td>{{exitDate}}</td>
+          <td>profit</td>
           <td>{{success}}</td>
         </tr>
         {{/each}}
