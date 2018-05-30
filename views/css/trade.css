@@ -1,3 +1,5 @@
-#monthly-result-list {
-  border: solid 1;
+table {
+  border: solid powderblue;
+  margin-left: 20px;
+  margin-right: 20px;
 }

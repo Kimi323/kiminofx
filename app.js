@@ -48,7 +48,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
         console.log(req.body);
         var objectId = new ObjectID(objectIdString);
         //console.log(objectId);
-        db.collection('trades').findOneAndDelete({'_id': '5b0e3ff5d9295632140961f6'}, (err, result) => {
+        db.collection('trades').findOneAndDelete({"_id": ObjectID(objectIdString)}, (err, result) => {
             if (err) {
                 return console.log('Unable to delete trade record', err);
             }
