@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/trade.css">
     <title>Kimi no FX</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/trade.js"></script>
   </head>
 
   <body>
@@ -18,52 +19,62 @@
       <h2>Trade Log</h2>
       <form class="form-inline">
         <lable>currency pair</lable>
-        <input type="text"></input>
+        <select id="input-currency-pair">
+          <option value="GBP/JPY" selected>GBP/JPY</option>
+          <option value="USD/JPY">USD/JPY</option>
+        </select>
         <lable>Amount</lable>
-        <input type="number"></input>
+        <input type="number" id="input-amount"></input>
         <lable>Entry Price</lable>
-        <input type="number"></input>
+        <input type="number" id="input-entry-price"></input>
         <lable>Exit Price</lable>
-        <input type="number"></input>
+        <input type="number" id="inout-exit-price"></input>
         <lable>Entry Date</lable>
-        <input type="number"></input>
+        <input type="date" id="input-entry-date"></input>
         <lable>Exit Date</lable>
-        <input type="number"></input>
+        <input type="date" id="input-exit-date"></input>
         <lable>target price</lable>
-        <input type="number"></input>
+        <input type="number" id="input-target-price"></input>
         <lable>profit if win</lable>
-        <input type="number"></input>
-        <lable>損切</lable>
-        <input type="number"></input>
+        <input type="number" id="input-profit-if-win"></input>
+        <lable>stop loss</lable>
+        <input type="number" id="input-stop-loss"></input>
         <lable>Loss if Failed</lable>
-        <input type="number"></input>
+        <input type="number" id="input-loss-if-failed"></input>
       </form>
     </div>
-    <button>button</button>
+    <button type="button" class="btn btn-info btn-sm" id="add-new-trade">add new trade</button>
     <div>
-      <table class="table table-striped" id="monthly-result-list">
-        <tr>
-          <td>Currency Pair</td>
-          <td>Amount</td>
-          <td>Entry Price</td>
-          <td>Exit Price</td>
-          <td>Entry Date</td>
-          <td>Exit Date</td>
-          <td>Result</td>
-          <td>Success/fail</td>
-        </tr>
-        {{#each monthlyResult}}
-        <tr>
-          <td>{{currencyPair}}</td>
-          <td>{{amount}}</td>
-          <td>{{entryPrice}}</td>
-          <td>{{exitPrice}}</td>
-          <td>{{entryDate}}</td>
-          <td>{{exitDate}}</td>
-          <td>profit</td>
-          <td>{{success}}</td>
-        </tr>
-        {{/each}}
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>trade ID</th>
+            <th>Currency Pair</th>
+            <th>Amount</th>
+            <th>Entry Price</th>
+            <th>Exit Price</th>
+            <th>Entry Date</th>
+            <th>Exit Date</th>
+            <th>Result</th>
+            <th>Success/fail</th>
+          </tr>
+        </thead>
+        <tbody id="monthly-result-list">
+          {{#each monthlyResult}}
+          <tr>
+            <td>{{_id}}</td>
+            <td>{{currencyPair}}</td>
+            <td>{{amount}}</td>
+            <td>{{entryPrice}}</td>
+            <td>{{exitPrice}}</td>
+            <td>{{entryDate}}</td>
+            <td>{{exitDate}}</td>
+            <td>profit</td>
+            <td>{{success}}</td>
+            <td><button type="button" class="btn btn-danger btn-sm delete-trade">X</button></td>
+          </tr>
+          {{/each}}
+        </tbody>
       <table>
     <div>
   </body>
