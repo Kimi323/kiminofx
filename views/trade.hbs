@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/trade.css">
     <title>Kimi no FX</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/trade.js"></script>
   </head>
 
@@ -72,13 +73,33 @@
             <td>
               <div class="btn-group" role="group" aria-label="example">
                 <button type="button" class="btn btn-danger btn-sm delete-trade">Delete</button>
-                <button type="button" class="btn btn-success btn-sm show-details">Details</button>
+                <button type="button" class="btn btn-success btn-sm show-details" data-toggle="modal">Details</button>
               </div>
             </td>
           </tr>
           {{/each}}
         </tbody>
       <table>
+    </div>
+    <!-- Modal -->
+    <div id="trade-detail" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </body>
 </html>

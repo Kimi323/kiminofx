@@ -58,5 +58,7 @@ $(document).ready(() => {
     });
 
     //TODO:update record
-
+    $('.show-details').click(function() {
+        $('#trade-detail').modal('show');
+    })
 });
