@@ -86,3 +86,14 @@ pbcopy < ~/.ssh/id_rsa.pub
 test ssh connection with github
 $ ssh -T git@github.com
 Hi Kimi323! You've successfully authenticated, but GitHub does not provide shell access.
+
+5/28
+cannot use findOneAndDelete() by ObjectID, why???
+validate input value and blank. some input area can be blank but some cannot. using mongoose?
+
+5/31
+TODO:
+click detail button to open a new window. input trade plan etc in this window(form).
+click save button to POST to server.
+update record in DB.
+refresh page and display new data.

@@ -1,10 +1,6 @@
 $(document).ready(() => {
-    $('#monthly-result-list button').each(() => {
-      console.log($(this));
-      //$(this).attr('id', 'delete-exist-record');
-    })
     //create new record
-    $('#add-new-trade').click((e) => {
+    $('#add-new-trade').click(function() {
         const myNewTrade = {}
         const currencyPair = $('#input-currency-pair').val();
         const amount = $('#input-amount').val();
@@ -24,29 +20,43 @@ $(document).ready(() => {
              contentType: 'application/json',
              data: JSON.stringify(myNewTrade)
         }).done((result) => {
-            myNewTrade._id = result.ops._id;
-            //TODO: refesh page after inserting to db
-            location.reload();
+            alert('success'); //success not shown??
         }).fail((reject) => {
-            console.log('failed to POST to server')
+            console.log('failed to POST to server');
         });
+        location.reload();
     });
 
     //delete record
     $(".delete-trade").click(function() {
-        const id = $(this).parent().parent().find('td:first').text();
         const tradeToDelete = {};
-        tradeToDelete.id = id;
+        const tr = $(this).parent().parent().parent();
+        const currencyPair = tr.find('td:first').text();
+        const amount = tr.find('td:eq(1)').text();
+        const entryPrice = tr.find('td:eq(2)').text();
+        const exitPrice = tr.find('td:eq(3)').text();
+        const entryDate = tr.find('td:eq(4)').text();
+        const exitDate = tr.find('td:eq(5)').text();
+        tradeToDelete.currencyPair = currencyPair;
+        tradeToDelete.amount = amount;
+        tradeToDelete.entryPrice = entryPrice;
+        tradeToDelete.exitPrice = exitPrice;
+        tradeToDelete.entryDate = entryDate;
+        tradeToDelete.exitDate = exitDate;
         $.ajax({
              type: "POST",
              url: "/trade/delete",
              contentType: 'application/json',
              data: JSON.stringify(tradeToDelete)
         }).done((result) => {
-            //refesh page after inserting to db
-            location.reload();
-        }, 5000).fail((reject) => {
-            console.log('failed to POST to server')
+            console.log(result);
+            alert("successfully deleted")
+        }).fail((reject) => {
+            console.log('failed to POST to server');
         });
-    })
+        location.reload();
+    });
+
+    //TODO:update record
+
 });

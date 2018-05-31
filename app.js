@@ -44,22 +44,24 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
 
     //delete specific record
     app.post('/trade/delete', (req, res) => {
-        var objectIdString = req.body._id;
-        console.log(req.body);
-        var objectId = new ObjectID(objectIdString);
-        //console.log(objectId);
-        db.collection('trades').findOneAndDelete({"_id": ObjectID(objectIdString)}, (err, result) => {
+        const tradeToDelete = {
+          entryPrice: req.body.entryPrice,
+          exitPrice: req.body.exitPrice,
+          entryDate: req.body.entryDate,
+          exitDate: req.body.exitDate
+        }
+        db.collection('trades').findOneAndDelete(tradeToDelete, (err, result) => {
             if (err) {
                 return console.log('Unable to delete trade record', err);
             }
             console.log(result);
         });
     }, (err) => {
-        console.log('unable to log data from client side', err);
+        console.log('unable to post on server', err);
     });
 
-    var server = app.listen(3000, () => {
-        var port = server.address().port;
+    const server = app.listen(3000, () => {
+        const port = server.address().port;
         console.log('Express server listening on port %s.', port);
     });
     //client.close();

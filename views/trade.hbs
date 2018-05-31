@@ -28,7 +28,7 @@
         <lable>Entry Price</lable>
         <input type="number" id="input-entry-price"></input>
         <lable>Exit Price</lable>
-        <input type="number" id="inout-exit-price"></input>
+        <input type="number" id="input-exit-price"></input>
         <lable>Entry Date</lable>
         <input type="date" id="input-entry-date"></input>
         <lable>Exit Date</lable>
@@ -48,7 +48,6 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>trade ID</th>
             <th>Currency Pair</th>
             <th>Amount</th>
             <th>Entry Price</th>
@@ -57,13 +56,11 @@
             <th>Exit Date</th>
             <th>Result</th>
             <th>Success/fail</th>
-            <th></th>
           </tr>
         </thead>
         <tbody id="monthly-result-list">
           {{#each monthlyResult}}
           <tr>
-            <td>{{_id}}</td>
             <td>{{currencyPair}}</td>
             <td>{{amount}}</td>
             <td>{{entryPrice}}</td>
@@ -72,7 +69,12 @@
             <td>{{exitDate}}</td>
             <td>profit</td>
             <td>{{success}}</td>
-            <td><button type="button" class="btn btn-danger btn-sm delete-trade">X</button></td>
+            <td>
+              <div class="btn-group" role="group" aria-label="example">
+                <button type="button" class="btn btn-danger btn-sm delete-trade">Delete</button>
+                <button type="button" class="btn btn-success btn-sm show-details">Details</button>
+              </div>
+            </td>
           </tr>
           {{/each}}
         </tbody>
