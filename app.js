@@ -29,6 +29,26 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
         });
     });
 
+    //show detail of specific record
+    app.post('/trade/detail', (req, res) => {
+        const tradeToShow = {
+          entryPrice: req.body.entryPrice,
+          exitPrice: req.body.exitPrice,
+          entryDate: req.body.entryDate,
+          exitDate: req.body.exitDate
+        }
+        db.collection('trades').find(tradeToShow).toArray().then((docs) => {
+            if (err) {
+                return console.log('Unable to find the trade you clicked', err);
+            }
+            console.log('successfully find specific trade detail');
+            console.log(docs);
+            res.send(docs);
+        });
+    }, (err) => {
+        console.log('unable to post on server', err);
+    });
+
     //create new record
     app.post('/trade/create', (req, res) => {
         const myNewTrade = req.body;
@@ -36,7 +56,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
             if (err) {
                 return console.log('Unable to insert new trade record', err);
             }
-            console.log(result.ops);
+            res.send(result);
         });
     }, (err) => {
         console.log('unable to log data from client side', err);
@@ -54,7 +74,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
             if (err) {
                 return console.log('Unable to delete trade record', err);
             }
-            console.log(result);
+            res.send(result);
         });
     }, (err) => {
         console.log('unable to post on server', err);

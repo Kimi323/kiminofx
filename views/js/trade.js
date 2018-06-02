@@ -20,7 +20,7 @@ $(document).ready(() => {
              contentType: 'application/json',
              data: JSON.stringify(myNewTrade)
         }).done((result) => {
-            alert('success'); //success not shown??
+            alert('successfully inserted'); //success not shown??
         }).fail((reject) => {
             console.log('failed to POST to server');
         });
@@ -60,5 +60,30 @@ $(document).ready(() => {
     //TODO:update record
     $('.show-details').click(function() {
         $('#trade-detail').modal('show');
-    })
+        const tradeToShow = {};
+        const tr = $(this).parent().parent().parent();
+        const currencyPair = tr.find('td:first').text();
+        const amount = tr.find('td:eq(1)').text();
+        const entryPrice = tr.find('td:eq(2)').text();
+        const exitPrice = tr.find('td:eq(3)').text();
+        const entryDate = tr.find('td:eq(4)').text();
+        const exitDate = tr.find('td:eq(5)').text();
+        tradeToShow.currencyPair = currencyPair;
+        tradeToShow.amount = amount;
+        tradeToShow.entryPrice = entryPrice;
+        tradeToShow.exitPrice = exitPrice;
+        tradeToShow.entryDate = entryDate;
+        tradeToShow.exitDate = exitDate;
+        console.log(tradeToShow);
+        $.ajax({
+             type: "POST",
+             url: "/trade/detail",
+             contentType: 'application/json',
+             data: JSON.stringify(tradeToShow),
+             success: function(result){
+               console.log(result);
+               alert("success")
+             }
+        });
+    });
 });
