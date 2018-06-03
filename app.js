@@ -32,10 +32,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
     //show detail of specific record
     app.post('/trade/detail', (req, res) => {
         const tradeToShow = {
-          entryPrice: req.body.entryPrice,
-          exitPrice: req.body.exitPrice,
-          entryDate: req.body.entryDate,
-          exitDate: req.body.exitDate
+            insertedTime: req.body.insertedTime
         }
         db.collection('trades').find(tradeToShow).toArray().then((docs) => {
             if (err) {
@@ -65,15 +62,14 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
     //delete specific record
     app.post('/trade/delete', (req, res) => {
         const tradeToDelete = {
-          entryPrice: req.body.entryPrice,
-          exitPrice: req.body.exitPrice,
-          entryDate: req.body.entryDate,
-          exitDate: req.body.exitDate
+          insertedTime: req.body.insertedTime
         }
+        console.log(tradeToDelete);
         db.collection('trades').findOneAndDelete(tradeToDelete, (err, result) => {
             if (err) {
                 return console.log('Unable to delete trade record', err);
             }
+            console.log(result);
             res.send(result);
         });
     }, (err) => {

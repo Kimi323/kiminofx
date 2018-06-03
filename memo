@@ -97,3 +97,10 @@ click detail button to open a new window. input trade plan etc in this window(fo
 click save button to POST to server.
 update record in DB.
 refresh page and display new data.
+
+6/3
+how to find the first td in tr
+const tr = $(this).parent().parent().parent();
+const currencyPair = tr.find('td:first').text();
+find the nth td in tr
+const entryPrice = tr.find('td:eq(2)').text();

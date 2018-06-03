@@ -19,50 +19,50 @@
     <div id="input-area">
       <h2>Trade Log</h2>
       <form class="form-inline">
-        <lable>currency pair</lable>
+        <lable>通貨ペア</lable>
         <select id="input-currency-pair">
           <option value="GBP/JPY" selected>GBP/JPY</option>
           <option value="USD/JPY">USD/JPY</option>
         </select>
-        <lable>Amount</lable>
+        <lable>買/売</lable>
+        <select id="input-buy-or-sell">
+          <option value="買" selected>買</option>
+          <option value="売">売</option>
+        </select>
+        <lable>数量</lable>
         <input type="number" id="input-amount"></input>
-        <lable>Entry Price</lable>
+        <lable>エントリー価格</lable>
         <input type="number" id="input-entry-price"></input>
-        <lable>Exit Price</lable>
+        <lable>終了価格</lable>
         <input type="number" id="input-exit-price"></input>
-        <lable>Entry Date</lable>
+        <lable>エントリー日</lable>
         <input type="date" id="input-entry-date"></input>
-        <lable>Exit Date</lable>
+        <lable>終了日</lable>
         <input type="date" id="input-exit-date"></input>
-        <lable>target price</lable>
-        <input type="number" id="input-target-price"></input>
-        <lable>profit if win</lable>
-        <input type="number" id="input-profit-if-win"></input>
-        <lable>stop loss</lable>
-        <input type="number" id="input-stop-loss"></input>
-        <lable>Loss if Failed</lable>
-        <input type="number" id="input-loss-if-failed"></input>
       </form>
     </div>
-    <button type="button" class="btn btn-info btn-sm" id="add-new-trade">add new trade</button>
+    <button type="button" class="btn btn-info btn-sm" id="add-new-trade">トレードを追加</button>
     <div>
       <table class="table table-hover">
         <thead>
           <tr>
-            <th>Currency Pair</th>
-            <th>Amount</th>
-            <th>Entry Price</th>
-            <th>Exit Price</th>
-            <th>Entry Date</th>
-            <th>Exit Date</th>
-            <th>Result</th>
-            <th>Success/fail</th>
+            <th>通貨ペア</th>
+            <th>買/売</th>
+            <th>数量</th>
+            <th>エントリー価格</th>
+            <th>終了価格</th>
+            <th>エントリー日</th>
+            <th>終了日</th>
+            <th>損益</th>
+            <th>成功/失敗</th>
+            <th>記録時刻</th>
           </tr>
         </thead>
         <tbody id="monthly-result-list">
           {{#each monthlyResult}}
           <tr>
             <td>{{currencyPair}}</td>
+            <td>{{buyOrSell}}</td>
             <td>{{amount}}</td>
             <td>{{entryPrice}}</td>
             <td>{{exitPrice}}</td>
@@ -70,6 +70,7 @@
             <td>{{exitDate}}</td>
             <td>profit</td>
             <td>{{success}}</td>
+            <td>{{insertedTime}}</td>
             <td>
               <div class="btn-group" role="group" aria-label="example">
                 <button type="button" class="btn btn-danger btn-sm delete-trade">Delete</button>
@@ -83,7 +84,7 @@
     </div>
     <!-- Modal -->
     <div id="trade-detail" class="modal fade" role="dialog">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-lg">
 
         <!-- Modal content-->
         <div class="modal-content">
@@ -92,11 +93,44 @@
             <h4 class="modal-title">Trade Detail</h4>
           </div>
           <div class="modal-body">
-            <h5></h5>
-            <p>Some text in the modal.</p>
+            <form class="form-inline">
+              <h5>Basic information</h5>
+              <lable>currency pair</lable>
+              <select id="detail-currency-pair">
+                <option value="GBP/JPY">GBP/JPY</option>
+                <option value="USD/JPY">USD/JPY</option>
+              </select>
+              <lable>Amount</lable>
+              <input type="number" id="detail-amount"></input>
+              <lable>Entry Price</lable>
+              <input type="number" id="detail-entry-price"></input>
+              <lable>Exit Price</lable>
+              <input type="number" id="detail-exit-price"></input>
+              <lable>Entry Date</lable>
+              <input type="date" id="detail-entry-date"></input>
+              <lable>Exit Date</lable>
+              <input type="date" id="detail-exit-date"></input>
+              <hr>
+              <h5>Plan</h5>
+              <lable>Target Price</lable>
+              <input type="number" id="detail-target-price"></input>
+              <lable>Pips if Win</lable>
+              <input type="number" id="detail-profit-if-win"></input>
+              <lable>Profit if Win</lable>
+              <input type="number" id="detail-profit-if-win"></input>
+              <lable>Stop Loss</lable>
+              <input type="number" id="detail-stop-loss"></input>
+              <lable>Pips if Lose</lable>
+              <input type="number" id="detail-pips-if-lose"></input>
+              <lable>Loss if Failed</lable>
+              <input type="number" id="detail-loss-if-failed"></input>
+              <lable>Entry Reason</lable>
+              <input type="text" id="detail-entry-reason"></input>
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
           </div>
         </div>
 
