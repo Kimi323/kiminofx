@@ -1,4 +1,4 @@
-$(document).ready(() => {
+$(document).ready(function() {
     //create new record
     $('#add-new-trade').click(function() {
         const myNewTrade = {}
@@ -76,8 +76,27 @@ $(document).ready(() => {
                $('#detail-exit-price').val(detail.exitPrice);
                $('#detail-entry-date').val(detail.entryDate);
                $('#detail-exit-date').val(detail.exitDate);
+               $('#detail-inserted-time').val(detail.insertedTime);
                $('#trade-detail').modal('show');
              }
         });
+    });
+
+    //update by clicking save button
+    $('#detail-update').click(function() {
+        const tradeToUpdate = {};
+        tradeToUpdate.amount = $('#detail-amount').val();
+        tradeToUpdate.insertedTime = $('#detail-inserted-time').val();
+        $.ajax({
+             type: "POST",
+             url: "/trade/update",
+             contentType: 'application/json',
+             data: JSON.stringify(tradeToUpdate)
+        }).done((result) => {
+            alert("successfully saved")
+        }).fail((reject) => {
+            console.log('failed to save');
+        });
+        location.reload();
     });
 });

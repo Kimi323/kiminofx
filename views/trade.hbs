@@ -55,7 +55,7 @@
             <th>終了日</th>
             <th>損益</th>
             <th>成功/失敗</th>
-            <th>記録時刻</th>
+            <th>入力時刻</th>
           </tr>
         </thead>
         <tbody id="monthly-result-list">
@@ -94,43 +94,62 @@
           </div>
           <div class="modal-body">
             <form class="form-inline">
-              <h5>Basic information</h5>
-              <lable>currency pair</lable>
+              <h5>基本情報</h5>
+              <lable>通過ペア</lable>
               <select id="detail-currency-pair">
                 <option value="GBP/JPY">GBP/JPY</option>
                 <option value="USD/JPY">USD/JPY</option>
               </select>
-              <lable>Amount</lable>
+              <lable>数量</lable>
               <input type="number" id="detail-amount"></input>
-              <lable>Entry Price</lable>
+              <lable>買/売</lable>
+              <select id="detail-buy-or-sell">
+                <option value="買" selected>買</option>
+                <option value="売">売</option>
+              </select>
+              <lable>エントリー価格</lable>
               <input type="number" id="detail-entry-price"></input>
-              <lable>Exit Price</lable>
+              <lable>終了価格</lable>
               <input type="number" id="detail-exit-price"></input>
-              <lable>Entry Date</lable>
+              <lable>エントリー日</lable>
               <input type="date" id="detail-entry-date"></input>
-              <lable>Exit Date</lable>
+              <lable>終了日</lable>
               <input type="date" id="detail-exit-date"></input>
+              <lable>入力時刻</lable>
+              <input type="text" id="detail-inserted-time"></input>
               <hr>
-              <h5>Plan</h5>
-              <lable>Target Price</lable>
+              <h5>プラン</h5>
+              <lable>利食価格</lable>
               <input type="number" id="detail-target-price"></input>
-              <lable>Pips if Win</lable>
+              <lable>利食pips</lable>
               <input type="number" id="detail-profit-if-win"></input>
-              <lable>Profit if Win</lable>
+              <lable>予想利益</lable>
               <input type="number" id="detail-profit-if-win"></input>
-              <lable>Stop Loss</lable>
+              <lable>損切価格</lable>
               <input type="number" id="detail-stop-loss"></input>
-              <lable>Pips if Lose</lable>
+              <lable>損切pips</lable>
               <input type="number" id="detail-pips-if-lose"></input>
-              <lable>Loss if Failed</lable>
+              <lable>予想損失</lable>
               <input type="number" id="detail-loss-if-failed"></input>
-              <lable>Entry Reason</lable>
+              <lable>エントリーの理由</lable>
               <input type="text" id="detail-entry-reason"></input>
+              <h5>評価</h5>
+              <label class="radio-inline">
+                <input type="radio" name="perfect">素晴らしい（´▽｀*）ｱﾊﾊー
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="soso">普通　(0＾ー＾0）
+              </label>
+              <label class="radio-inline">
+                <input type="radio" name="bad">悪い　(ノД`)・゜・。
+              </label>
+              <lable>コメント</lable>
+              <input type="text" id="detail-comment"></input>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-success" data-dismiss="modal">Save</button>
+            <button type="button" class="btn btn-success" id="detail-update" data-dismiss="modal">Save</button>
           </div>
         </div>
 

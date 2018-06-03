@@ -46,6 +46,28 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
         console.log('unable to post on server', err);
     });
 
+    //update specific record
+    app.post('/trade/update', (req, res) => {
+        const insertedTime = req.body.insertedTime;
+        const tradeToUpdate = {
+            amount: req.body.amount
+        }
+        console.log(insertedTime);
+        console.log(tradeToUpdate);
+        db.collection('trades').findOneAndUpdate({
+            insertedTime: insertedTime
+        }, {
+            $set: tradeToUpdate
+        }, {
+            returnOriginal: false
+        }).then((result) => {
+            res.send(result);
+            console.log(result);
+        });
+    }, (err) => {
+        console.log('unable to post on server', err);
+    });
+
     //create new record
     app.post('/trade/create', (req, res) => {
         const myNewTrade = req.body;
