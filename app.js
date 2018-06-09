@@ -50,7 +50,14 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
     app.post('/trade/update', (req, res) => {
         const insertedTime = req.body.insertedTime;
         const tradeToUpdate = {
-            amount: req.body.amount
+            currencyPair: req.body.currencyPair,
+            amount: req.body.amount,
+            buyOrSell: req.body.buyOrSell,
+            entryPrice: req.body.entryPrice,
+            exitPrice: req.body.exitPrice,
+            entryDate: req.body.entryDate,
+            exitDate: req.body.exitDate,
+            successOrNot: req.body.successOrNot
         }
         console.log(insertedTime);
         console.log(tradeToUpdate);

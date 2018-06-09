@@ -69,7 +69,7 @@
             <td>{{entryDate}}</td>
             <td>{{exitDate}}</td>
             <td>profit</td>
-            <td>{{success}}</td>
+            <td>{{successOrNot}}</td>
             <td>{{insertedTime}}</td>
             <td>
               <div class="btn-group" role="group" aria-label="example">
@@ -95,6 +95,8 @@
           <div class="modal-body">
             <form class="form-inline">
               <h5>基本情報</h5>
+              <lable>作成日時</lable>
+              <p id="detail-inserted-time"></p>
               <lable>通過ペア</lable>
               <select id="detail-currency-pair">
                 <option value="GBP/JPY">GBP/JPY</option>
@@ -115,8 +117,11 @@
               <input type="date" id="detail-entry-date"></input>
               <lable>終了日</lable>
               <input type="date" id="detail-exit-date"></input>
-              <lable>入力時刻</lable>
-              <input type="text" id="detail-inserted-time"></input>
+              <lable>成功/失敗</lable>
+              <select id="detail-success-or-not">
+                <option value="success" selected>成功</option>
+                <option value="failure">失敗</option>
+              </select>
               <hr>
               <h5>プラン</h5>
               <lable>利食価格</lable>

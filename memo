@@ -104,3 +104,8 @@ const tr = $(this).parent().parent().parent();
 const currencyPair = tr.find('td:first').text();
 find the nth td in tr
 const entryPrice = tr.find('td:eq(2)').text();
+UI design
+背景イラスト？？
+hide input area. only show it when add new trade button is clicked.
+users should not be able to edit inserted time. it is better not showing it in UI? use local storage or sth else?
+勝率　取引回数　トータル損益　
