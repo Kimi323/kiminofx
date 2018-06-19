@@ -39,7 +39,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
                 return console.log('Unable to find the trade you clicked', err);
             }
             console.log('successfully find specific trade detail');
-            console.log(docs);
+            //console.log(docs);
             res.send(docs);
         });
     }, (err) => {
@@ -69,7 +69,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
             returnOriginal: false
         }).then((result) => {
             res.send(result);
-            console.log(result);
+            //console.log(result);
         });
     }, (err) => {
         console.log('unable to post on server', err);
@@ -91,9 +91,9 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
     //delete specific record
     app.post('/trade/delete', (req, res) => {
         const tradeToDelete = {
-          insertedTime: req.body.insertedTime
+            insertedTime: req.body.insertedTime
         }
-        console.log(tradeToDelete);
+        //console.log(tradeToDelete);
         db.collection('trades').findOneAndDelete(tradeToDelete, (err, result) => {
             if (err) {
                 return console.log('Unable to delete trade record', err);
@@ -104,6 +104,32 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
     }, (err) => {
         console.log('unable to post on server', err);
     });
+
+    app.post('/trade/search', (req, res) => {
+        const tradeToSearch = {
+            currencyPair: req.body.currencyPair,
+            entryDateFrom: req.body.entryDateFrom,
+            entryDateTo: req.body.entryDateTo,
+            exitDateFrom: req.body.exitDateFrom,
+            exitDateTo: req.body.exitDateTo
+        }
+        console.log(tradeToSearch);
+        const query = {
+            $and: [
+                // { entryDate: {$gte: tradeToSearch.entryDateFrom, $lte: tradeToSearch.entryDateTo} },
+                { exitDate: {$gte: tradeToSearch.exitDateFrom, $lte: tradeToSearch.exitDateTo} },
+                { currencyPair: tradeToSearch.currencyPair } ]
+        }
+        db.collection('trades').find(query).toArray().then((docs) => {
+            console.log(docs);
+            // res.render('trade.hbs', {
+            //     monthlyResult: docs
+            // });
+            res.send(docs);
+        }, (err) => {
+            console.log('unable to fetch trades', err);
+        });
+    })
 
     const server = app.listen(3000, () => {
         const port = server.address().port;

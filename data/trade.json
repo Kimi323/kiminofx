@@ -1,9 +1,40 @@
 {
   "currencyPair": "GBP/JPY",
+  "buyOrSell": "sell",
   "amount": 5000,
   "entryPrice": 149.37,
   "exitPrice": 149.90,
-  "entryDate": "2018/05/02",
-  "exitDate": "2018/05/02",
+  "entryDate": "2018-05-02",
+  "exitDate": "2018-05-02",
+  "successOrNot": false
+}
+{
+  "currencyPair": "GBP/JPY",
+  "buyOrSell": "sell",
+  "amount": 5000,
+  "entryPrice": 148.85,
+  "exitPrice": 147.50,
+  "entryDate": "2018-05-03",
+  "exitDate": "2018-05-04",
+  "success": true
+}
+{
+  "currencyPair": "GBP/JPY",
+  "buyOrSell": "buy",
+  "amount": 5000,
+  "entryPrice": 148.95,
+  "exitPrice": 148.35,
+  "entryDate": "2018-05-09",
+  "exitDate": "2018-05-10",
+  "success": false
+}
+{
+  "currencyPair": "GBP/JPY",
+  "buyOrSell": "sell",
+  "amount": 5000,
+  "entryPrice": 144.26,
+  "exitPrice": 144.87,
+  "entryDate": "2018-05-29",
+  "exitDate": "2018-05-29",
   "success": false
 }

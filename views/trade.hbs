@@ -13,35 +13,62 @@
   </head>
 
   <body>
-    <div>
-      <h1>Monthly Result</h1>
+    <div class="row">
+      <div class="col-sm-5">
+        <div id="header">
+          <img id="fx-logger-logo" alt="fx-logger-logo" src="image/fx-logger.png">
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <div class="col-sm-12">
+          <div id="search-area">
+            <lable>通貨ペア</lable>
+            <select id="search-currency-pair">
+              <option value="GBP/JPY" selected>GBP/JPY</option>
+              <option value="USD/JPY">USD/JPY</option>
+            </select>
+            <lable>決済日</lable>
+            <lable>From</lable>
+            <input type="date" id="search-exit-date-from"></input>
+            <lable>To</lable>
+            <input type="date" id="search-exit-date-to"></input>
+            <button type="button" class="btn btn-warning btn-lg" id="search-trade">search</button>
+          </div>
+        </div>
+        <hr>
+        <div class="col-sm-12">
+          <button type="button" class="btn btn-warning-outline" id="show-input-area">Add New Trade</button>
+          <div id="input-area">
+            <form class="form-inline">
+              <lable>通貨ペア</lable>
+              <select id="input-currency-pair">
+                <option value="GBP/JPY" selected>GBP/JPY</option>
+                <option value="USD/JPY">USD/JPY</option>
+              </select>
+              <lable>買/売</lable>
+              <select id="input-buy-or-sell">
+                <option value="買" selected>買</option>
+                <option value="売">売</option>
+              </select>
+              <lable>数量</lable>
+              <input type="number" id="input-amount"></input>
+              <lable>エントリー価格</lable>
+              <input type="number" id="input-entry-price"></input>
+              <lable>終了価格</lable>
+              <input type="number" id="input-exit-price"></input>
+              <br>
+              <lable>エントリー日</lable>
+              <input type="date" id="input-entry-date"></input>
+              <lable>決済日</lable>
+              <input type="date" id="input-exit-date"></input>
+            </form>
+            <button type="button" class="btn btn-info btn-sm" id="add-new-trade">OK</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="input-area">
-      <h2>Trade Log</h2>
-      <form class="form-inline">
-        <lable>通貨ペア</lable>
-        <select id="input-currency-pair">
-          <option value="GBP/JPY" selected>GBP/JPY</option>
-          <option value="USD/JPY">USD/JPY</option>
-        </select>
-        <lable>買/売</lable>
-        <select id="input-buy-or-sell">
-          <option value="買" selected>買</option>
-          <option value="売">売</option>
-        </select>
-        <lable>数量</lable>
-        <input type="number" id="input-amount"></input>
-        <lable>エントリー価格</lable>
-        <input type="number" id="input-entry-price"></input>
-        <lable>終了価格</lable>
-        <input type="number" id="input-exit-price"></input>
-        <lable>エントリー日</lable>
-        <input type="date" id="input-entry-date"></input>
-        <lable>終了日</lable>
-        <input type="date" id="input-exit-date"></input>
-      </form>
-    </div>
-    <button type="button" class="btn btn-info btn-sm" id="add-new-trade">トレードを追加</button>
+
+    <hr>
     <div>
       <table class="table table-hover">
         <thead>
@@ -52,10 +79,11 @@
             <th>エントリー価格</th>
             <th>終了価格</th>
             <th>エントリー日</th>
-            <th>終了日</th>
+            <th>決済日</th>
             <th>損益</th>
             <th>成功/失敗</th>
             <th>入力時刻</th>
+            <th></th>
           </tr>
         </thead>
         <tbody id="monthly-result-list">
@@ -73,8 +101,8 @@
             <td>{{insertedTime}}</td>
             <td>
               <div class="btn-group" role="group" aria-label="example">
-                <button type="button" class="btn btn-danger btn-sm delete-trade">Delete</button>
-                <button type="button" class="btn btn-success btn-sm show-details" data-toggle="modal">Details</button>
+                <button type="button" class="btn btn-danger-outline btn-sm delete-trade">X</button>
+                <button type="button" class="btn btn-success-outline btn-sm show-details" data-toggle="modal">Details</button>
               </div>
             </td>
           </tr>
@@ -95,7 +123,6 @@
           <div class="modal-body">
             <form class="form-inline">
               <h5>基本情報</h5>
-              <lable>作成日時</lable>
               <p id="detail-inserted-time"></p>
               <lable>通過ペア</lable>
               <select id="detail-currency-pair">

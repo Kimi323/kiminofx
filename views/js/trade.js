@@ -1,5 +1,13 @@
 $(document).ready(function() {
-    $('td:nth-child(10),th:nth-child(10)').hide();
+
+    //$('td:nth-child(10),th:nth-child(10)').hide();
+    //$('#detail-inserted-time').hide();
+    $('#input-area').hide();
+
+    $('#show-input-area').click(function() {
+        $('#input-area').toggle();
+    })
+
     //create new record
     $('#add-new-trade').click(function() {
         const currencyPair = $('#input-currency-pair').val();
@@ -16,7 +24,7 @@ $(document).ready(function() {
         const hour = now.getHours();
         const min = now.getMinutes();
         const sec = now.getSeconds();
-        const insertedTime = `${year}/0${month}/0${day} ${hour}:${min}:${sec}`;
+        const insertedTime = `${year}/${month}/${day} ${hour}:${min}:${sec}`;
         const myNewTrade = {
           currencyPair: currencyPair,
           buyOrSell: buyOrSell,
@@ -33,9 +41,9 @@ $(document).ready(function() {
              contentType: 'application/json',
              data: JSON.stringify(myNewTrade)
         }).done((result) => {
-            alert('successfully inserted'); //success not shown??
+            //alert('successfully inserted'); //success not shown??
         }).fail((reject) => {
-            console.log('failed to POST to server');
+            alert('Cannot insert, please contact developer');
         });
         location.reload();
     });
@@ -53,9 +61,9 @@ $(document).ready(function() {
              contentType: 'application/json',
              data: JSON.stringify(tradeToDelete)
         }).done((result) => {
-            alert("successfully deleted")
+            //alert("successfully deleted")
         }).fail((reject) => {
-            console.log('failed to POST to server');
+            alert('Cannot delete, please contact developer');
         });
         location.reload();
     });
@@ -104,10 +112,57 @@ $(document).ready(function() {
              contentType: 'application/json',
              data: JSON.stringify(tradeToUpdate)
         }).done((result) => {
-            alert("successfully saved")
+            //alert("successfully saved")
         }).fail((reject) => {
-            console.log('failed to save');
+            alert('Cannot update, please contact developer');
         });
         location.reload();
+    });
+
+    $('#search-trade').click(function() {
+        const tradeToSearch = {
+            currencyPair: $('#search-currency-pair').val(),
+            entryDateFrom: $('#search-entry-date-from').val(),
+            entryDateTo: $('#search-entry-date-to').val(),
+            exitDateFrom: $('#search-exit-date-from').val(),
+            exitDateTo: $('#search-exit-date-to').val()
+        };
+        $.ajax({
+             type: "POST",
+             url: "/trade/search",
+             contentType: 'application/json',
+             data: JSON.stringify(tradeToSearch)
+        }).done((result) => {
+            console.log(result);
+            $('#monthly-result-list tr').remove();
+            // const currencyPair = result[0].currencyPair;
+            // $('#monthly-result-list tr>td').text(currencyPair);
+            const tbody = $('#monthly-result-list');
+            var i;
+            for (i = 0; i < result.length; i++) {
+                tbody.append(
+                    `<tr><td>${result[i].currencyPair}</td>
+                    <td>${result[i].buyOrSell}</td>
+                    <td>${result[i].amount}</td>
+                    <td>${result[i].entryPrice}</td>
+                    <td>${result[i].exitPrice}</td>
+                    <td>${result[i].entryDate}</td>
+                    <td>${result[i].exitDate}</td>
+                    <td></td>
+                    <td>${result[i].successOrNot}</td>
+                    <td>${result[i].insertedTime}</td>
+                    <td>
+                      <div class="btn-group" role="group" aria-label="example">
+                        <button type="button" class="btn btn-danger-outline btn-sm delete-trade">X</button>
+                        <button type="button" class="btn btn-success-outline btn-sm show-details" data-toggle="modal">Details</button>
+                      </div>
+                    </td></tr>`
+                )
+            }
+            //const props = ["currencyPair", "buyOrSell", "amount", "entryPrice", "exitPrice","exitDate", "exitDate", "profit", "successOrNot"];
+
+        }).fail((reject) => {
+            alert('Cannot search, please contact developer');
+        });
     });
 });

@@ -35,6 +35,9 @@ list all documents
 show documents match constrains only GBP/JPY
 > db.trades.find({"currencyPair": "GBP/JPY"}).pretty()
 
+import data
+KiminoMacBook-Pro:bin kimi$ ./mongoimport --drop -d fx -c trades ~/Desktop/kiminofx/data/trade.json
+
 KiminoMacBook-Pro:kiminofx kimi$ npm init
 this will create a file called package.json uder your root folder.
 package.json will look like this
@@ -109,3 +112,59 @@ UI design
 hide input area. only show it when add new trade button is clicked.
 users should not be able to edit inserted time. it is better not showing it in UI? use local storage or sth else?
 勝率　取引回数　トータル損益　
+
+app.post('/trade/search', (req, res) => {
+    const tradeToSearch = {
+        currencyPair: req.body.currencyPair,
+        entryDateFrom: req.body.entryDateFrom,
+        entryDateTo: req.body.entryDateTo,
+        exitDateFrom: req.body.exitDateFrom,
+        exitDateTo: req.body.exitDateTo
+    }
+    console.log(tradeToSearch);
+    const query = {
+        $and: [
+            { entryDate: {$gte: tradeToSearch.entryDateFrom, $lte: tradeToSearch.entryDateTo} },
+            { exitDate: {$gte: tradeToSearch.exitDateFrom, $lte: tradeToSearch.exitDateTo} },
+            { currencyPair: "GBP/JPY" } ]
+    }
+    db.collection('trades').find(query).toArray().then((docs) => {
+        console.log(docs);
+        // res.render('trade.hbs', {
+        //     monthlyResult: docs
+        // });
+        //res.send(docs);
+    }, (err) => {
+        console.log('unable to fetch trades', err);
+    });
+})
+
+
+$('td:nth-child(10),th:nth-child(10)').hide();
+$('#detail-inserted-time').hide();
+$('#input-area').hide();
+
+$('#show-input-area').click(function() {
+    $('#input-area').toggle();
+})
+
+$('#search-trade').click(function() {
+    const tradeToSearch = {
+        currencyPair: $('#search-currency-pair').val(),
+        entryDateFrom: $('#search-entry-date-from').val(),
+        entryDateTo: $('#search-entry-date-to').val(),
+        exitDateFrom: $('#search-exit-date-from').val(),
+        exitDateTo: $('#search-exit-date-to').val()
+    };
+    $.ajax({
+         type: "POST",
+         url: "/trade/search",
+         contentType: 'application/json',
+         data: JSON.stringify(tradeToSearch)
+    }).done((result) => {
+        console.log(result);
+        alert("successfully searched")
+    }).fail((reject) => {
+        alert('Cannot search, please contact developer');
+    });
+});
