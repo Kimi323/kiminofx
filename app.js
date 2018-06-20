@@ -23,7 +23,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
         db.collection('trades').find({}).toArray().then((docs) => {
             res.render('trade.hbs', {
                 monthlyResult: docs
-            });
+            })
         }, (err) => {
             console.log('unable to fetch trades', err);
         });
@@ -57,9 +57,10 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
             exitPrice: req.body.exitPrice,
             entryDate: req.body.entryDate,
             exitDate: req.body.exitDate,
-            successOrNot: req.body.successOrNot
+            successOrNot: req.body.successOrNot,
+            profit: req.body.profit
         }
-        console.log(insertedTime);
+        //console.log(insertedTime);
         console.log(tradeToUpdate);
         db.collection('trades').findOneAndUpdate({
             insertedTime: insertedTime

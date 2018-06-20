@@ -25,24 +25,19 @@
 }
 
 #search-area {
-  border: solid #468fc091;
+  border-bottom: solid #468fc091;
 }
 
-#search-area label {
-  margin-left: 10px;
-  margin-right: 5px;
-}
-
-#search-area input {
-  margin-left: 10px;
-  margin-right: 5px;
-}
-
-#search-area select {
+#search-area label, #search-area input, #search-area select {
   margin-left: 10px;
   margin-right: 5px;
 }
 
 #input-area {
-  border: solid powderblue;
+  border-bottom: solid powderblue;
+  padding: 10px;
+}
+
+.col-sm-12, #result-summary {
+  padding: 10px;
 }

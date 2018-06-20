@@ -32,37 +32,43 @@
             <input type="date" id="search-exit-date-from"></input>
             <lable>To</lable>
             <input type="date" id="search-exit-date-to"></input>
-            <button type="button" class="btn btn-warning btn-lg" id="search-trade">search</button>
+            <button type="button" class="btn btn-warning btn-sm" id="search-trade">search</button>
           </div>
         </div>
         <hr>
         <div class="col-sm-12">
           <button type="button" class="btn btn-warning-outline" id="show-input-area">Add New Trade</button>
           <div id="input-area">
-            <form class="form-inline">
-              <lable>通貨ペア</lable>
-              <select id="input-currency-pair">
-                <option value="GBP/JPY" selected>GBP/JPY</option>
-                <option value="USD/JPY">USD/JPY</option>
-              </select>
-              <lable>買/売</lable>
-              <select id="input-buy-or-sell">
-                <option value="買" selected>買</option>
-                <option value="売">売</option>
-              </select>
-              <lable>数量</lable>
-              <input type="number" id="input-amount"></input>
-              <lable>エントリー価格</lable>
-              <input type="number" id="input-entry-price"></input>
-              <lable>終了価格</lable>
-              <input type="number" id="input-exit-price"></input>
-              <br>
-              <lable>エントリー日</lable>
-              <input type="date" id="input-entry-date"></input>
-              <lable>決済日</lable>
-              <input type="date" id="input-exit-date"></input>
-            </form>
-            <button type="button" class="btn btn-info btn-sm" id="add-new-trade">OK</button>
+            <lable>通貨ペア</lable>
+            <select id="input-currency-pair">
+              <option value="GBP/JPY" selected>GBP/JPY</option>
+              <option value="USD/JPY">USD/JPY</option>
+            </select>
+            <lable>買/売</lable>
+            <select id="input-buy-or-sell">
+              <option value="買" selected>買</option>
+              <option value="売">売</option>
+            </select>
+            <lable>数量</lable>
+            <input type="number" id="input-amount"></input>
+            <br>
+            <lable>エントリー価格</lable>
+            <input type="number" id="input-entry-price"></input>
+            <lable>終了価格</lable>
+            <input type="number" id="input-exit-price"></input>
+            <br>
+            <lable>エントリー日</lable>
+            <input type="date" id="input-entry-date"></input>
+            <lable>決済日</lable>
+            <input type="date" id="input-exit-date"></input>
+            <button type="button" class="btn btn-info btn-sm" id="add-new-trade">Add</button>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div id="result-summary">
+            <h4>合計損益</h4><h4 id="total-profit"></h4>
+            <h4>取引回数</h4><h4 id="trade-times"></h4>
+            <h4>勝率</h4><h4 id="percentage-of-success"></h4>
           </div>
         </div>
       </div>
@@ -96,7 +102,7 @@
             <td>{{exitPrice}}</td>
             <td>{{entryDate}}</td>
             <td>{{exitDate}}</td>
-            <td>profit</td>
+            <td>{{profit}}</td>
             <td>{{successOrNot}}</td>
             <td>{{insertedTime}}</td>
             <td>
@@ -122,9 +128,8 @@
           </div>
           <div class="modal-body">
             <form class="form-inline">
-              <h5>基本情報</h5>
               <p id="detail-inserted-time"></p>
-              <lable>通過ペア</lable>
+              <lable>通貨ペア</lable>
               <select id="detail-currency-pair">
                 <option value="GBP/JPY">GBP/JPY</option>
                 <option value="USD/JPY">USD/JPY</option>
@@ -136,14 +141,17 @@
                 <option value="買" selected>買</option>
                 <option value="売">売</option>
               </select>
+              <br>
               <lable>エントリー価格</lable>
               <input type="number" id="detail-entry-price"></input>
-              <lable>終了価格</lable>
+              <lable>決済価格</lable>
               <input type="number" id="detail-exit-price"></input>
+              <br>
               <lable>エントリー日</lable>
               <input type="date" id="detail-entry-date"></input>
-              <lable>終了日</lable>
+              <lable>決済日</lable>
               <input type="date" id="detail-exit-date"></input>
+              <br>
               <lable>成功/失敗</lable>
               <select id="detail-success-or-not">
                 <option value="success" selected>成功</option>

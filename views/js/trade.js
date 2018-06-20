@@ -1,13 +1,22 @@
 $(document).ready(function() {
 
-    //$('td:nth-child(10),th:nth-child(10)').hide();
-    //$('#detail-inserted-time').hide();
+    $('td:nth-child(10),th:nth-child(10)').hide();
+    $('#detail-inserted-time').hide();
     $('#input-area').hide();
-
     $('#show-input-area').click(function() {
         $('#input-area').toggle();
     })
 
+    //calculate summary
+    var sum = 0;
+    $('#monthly-result-list td:nth-child(8)').each(function() {
+        const value = $(this).text();
+        // add only if the value is number
+        if(!isNaN(value) && value.length != 0) {
+            sum += parseFloat(value);
+        }
+        $('#total-profit').text(sum);
+    });
     //create new record
     $('#add-new-trade').click(function() {
         const currencyPair = $('#input-currency-pair').val();
@@ -95,6 +104,17 @@ $(document).ready(function() {
 
     //update by clicking save button
     $('#detail-update').click(function() {
+
+        let calcProfit = function(result) {
+            result.profit = Math.round((result.exitPrice - result.entryPrice) * result.amount);
+            if (result.successOrNot === "success") {
+                result.profit = Math.abs(result.profit);
+            } else {
+                result.profit = -Math.abs(result.profit);
+            }
+            return result.profit
+        }
+
         const tradeToUpdate = {
             currencyPair: $('#detail-currency-pair').val(),
             amount: $('#detail-amount').val(), //need refactering
@@ -106,6 +126,8 @@ $(document).ready(function() {
             successOrNot: $('#detail-success-or-not').val(),
             insertedTime: $('#detail-inserted-time').text()
         };
+        tradeToUpdate.profit = calcProfit(tradeToUpdate);
+
         $.ajax({
              type: "POST",
              url: "/trade/update",
@@ -119,6 +141,7 @@ $(document).ready(function() {
         location.reload();
     });
 
+    //search trade by currencyPair and exitDate
     $('#search-trade').click(function() {
         const tradeToSearch = {
             currencyPair: $('#search-currency-pair').val(),
@@ -135,8 +158,6 @@ $(document).ready(function() {
         }).done((result) => {
             console.log(result);
             $('#monthly-result-list tr').remove();
-            // const currencyPair = result[0].currencyPair;
-            // $('#monthly-result-list tr>td').text(currencyPair);
             const tbody = $('#monthly-result-list');
             var i;
             for (i = 0; i < result.length; i++) {
@@ -148,9 +169,8 @@ $(document).ready(function() {
                     <td>${result[i].exitPrice}</td>
                     <td>${result[i].entryDate}</td>
                     <td>${result[i].exitDate}</td>
-                    <td></td>
+                    <td>${result[i].profit}</td>
                     <td>${result[i].successOrNot}</td>
-                    <td>${result[i].insertedTime}</td>
                     <td>
                       <div class="btn-group" role="group" aria-label="example">
                         <button type="button" class="btn btn-danger-outline btn-sm delete-trade">X</button>
@@ -159,8 +179,6 @@ $(document).ready(function() {
                     </td></tr>`
                 )
             }
-            //const props = ["currencyPair", "buyOrSell", "amount", "entryPrice", "exitPrice","exitDate", "exitDate", "profit", "successOrNot"];
-
         }).fail((reject) => {
             alert('Cannot search, please contact developer');
         });
