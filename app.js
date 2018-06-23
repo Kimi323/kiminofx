@@ -20,7 +20,7 @@ MongoClient.connect('mongodb://localhost:27017/fx', (err, client) => {
 
     //list all records
     app.get('/trade', (req, res) => {
-        db.collection('trades').find({}).toArray().then((docs) => {
+        db.collection('trades').find({}).sort( { entryDate: 1 } ).toArray().then((docs) => {
             res.render('trade.hbs', {
                 monthlyResult: docs
             })
