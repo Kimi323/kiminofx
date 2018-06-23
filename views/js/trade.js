@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     //calculate summary
     var sum = 0;
-    $('#monthly-result-list td:nth-child(8)').each(function() {
+    $('#monthly-result-tbody td:nth-child(8)').each(function() {
         const value = $(this).text();
         // add only if the value is number
         if(!isNaN(value) && value.length != 0) {
@@ -91,6 +91,7 @@ $(document).ready(function() {
              success: function(result){
                const detail = result[0];
                $('#detail-amount').val(detail.amount);
+               $('#detail-buy-or-sell').val(detail.buyOrSell);
                $('#detail-entry-price').val(detail.entryPrice);
                $('#detail-exit-price').val(detail.exitPrice);
                $('#detail-entry-date').val(detail.entryDate);
@@ -157,8 +158,8 @@ $(document).ready(function() {
              data: JSON.stringify(tradeToSearch)
         }).done((result) => {
             console.log(result);
-            $('#monthly-result-list tr').remove();
-            const tbody = $('#monthly-result-list');
+            $('#monthly-result-tbody tr').remove();
+            const tbody = $('#monthly-result-tbody');
             var i;
             for (i = 0; i < result.length; i++) {
                 tbody.append(

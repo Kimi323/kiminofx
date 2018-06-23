@@ -20,63 +20,61 @@
         </div>
       </div>
       <div class="col-sm-7">
-        <div class="col-sm-12">
-          <div id="search-area">
+        <div class="col-sm-12" id="search-area-div">
+          <form class="form-inline" id="search-area">
             <lable>通貨ペア</lable>
-            <select id="search-currency-pair">
+            <select class="form-control" id="search-currency-pair">
               <option value="GBP/JPY" selected>GBP/JPY</option>
               <option value="USD/JPY">USD/JPY</option>
             </select>
-            <lable>決済日</lable>
-            <lable>From</lable>
-            <input type="date" id="search-exit-date-from"></input>
+            <lable>決済日 From</lable>
+            <input class="form-control" type="date" id="search-exit-date-from"></input>
             <lable>To</lable>
-            <input type="date" id="search-exit-date-to"></input>
-            <button type="button" class="btn btn-warning btn-sm" id="search-trade">search</button>
-          </div>
+            <input class="form-control" type="date" id="search-exit-date-to"></input>
+            <button type="button" class="btn btn-info btn-sm" id="search-trade">search</button>
+          </form>
         </div>
         <hr>
-        <div class="col-sm-12">
-          <button type="button" class="btn btn-warning-outline" id="show-input-area">Add New Trade</button>
-          <div id="input-area">
+        <div class="col-sm-12" id="input-area-div">
+          <button type="button" class="btn btn-warning-outline btn-block" id="show-input-area">Add New Trade</button>
+          <form class="form-inline" id="input-area">
             <lable>通貨ペア</lable>
-            <select id="input-currency-pair">
+            <select class="form-control" id="input-currency-pair">
               <option value="GBP/JPY" selected>GBP/JPY</option>
               <option value="USD/JPY">USD/JPY</option>
             </select>
             <lable>買/売</lable>
-            <select id="input-buy-or-sell">
+            <select class="form-control" id="input-buy-or-sell">
               <option value="買" selected>買</option>
               <option value="売">売</option>
             </select>
             <lable>数量</lable>
-            <input type="number" id="input-amount"></input>
+            <input class="form-control" type="number" id="input-amount"></input>
             <br>
             <lable>エントリー価格</lable>
-            <input type="number" id="input-entry-price"></input>
+            <input class="form-control" type="number" id="input-entry-price"></input>
             <lable>終了価格</lable>
-            <input type="number" id="input-exit-price"></input>
+            <input class="form-control" type="number" id="input-exit-price"></input>
             <br>
             <lable>エントリー日</lable>
-            <input type="date" id="input-entry-date"></input>
+            <input class="form-control" type="date" id="input-entry-date"></input>
             <lable>決済日</lable>
-            <input type="date" id="input-exit-date"></input>
+            <input class="form-control" type="date" id="input-exit-date"></input>
             <button type="button" class="btn btn-info btn-sm" id="add-new-trade">Add</button>
-          </div>
+          </form>
         </div>
         <div class="col-sm-12">
-          <div id="result-summary">
-            <h4>合計損益</h4><h4 id="total-profit"></h4>
-            <h4>取引回数</h4><h4 id="trade-times"></h4>
-            <h4>勝率</h4><h4 id="percentage-of-success"></h4>
+          <div id="result-summary-div">
+            <lable>合計損益</lable><span id="total-profit"></span>
+            <lable>取引回数</lable><span id="trade-times"></span>
+            <lable>勝率</lable><span id="percentage-of-success"></span>
           </div>
         </div>
       </div>
     </div>
 
-    <hr>
-    <div>
-      <table class="table table-hover">
+    <div id="monthly-result-div">
+      <table class="table table-hover" id="monthly-result-table">
         <thead>
           <tr>
             <th>通貨ペア</th>
@@ -92,7 +90,7 @@
             <th></th>
           </tr>
         </thead>
-        <tbody id="monthly-result-list">
+        <tbody id="monthly-result-tbody">
           {{#each monthlyResult}}
           <tr>
             <td>{{currencyPair}}</td>
@@ -129,66 +127,79 @@
           <div class="modal-body">
             <form class="form-inline">
               <p id="detail-inserted-time"></p>
-              <lable>通貨ペア</lable>
-              <select id="detail-currency-pair">
-                <option value="GBP/JPY">GBP/JPY</option>
-                <option value="USD/JPY">USD/JPY</option>
-              </select>
-              <lable>数量</lable>
-              <input type="number" id="detail-amount"></input>
-              <lable>買/売</lable>
-              <select id="detail-buy-or-sell">
-                <option value="買" selected>買</option>
-                <option value="売">売</option>
-              </select>
-              <br>
-              <lable>エントリー価格</lable>
-              <input type="number" id="detail-entry-price"></input>
-              <lable>決済価格</lable>
-              <input type="number" id="detail-exit-price"></input>
-              <br>
-              <lable>エントリー日</lable>
-              <input type="date" id="detail-entry-date"></input>
-              <lable>決済日</lable>
-              <input type="date" id="detail-exit-date"></input>
-              <br>
-              <lable>成功/失敗</lable>
-              <select id="detail-success-or-not">
-                <option value="success" selected>成功</option>
-                <option value="failure">失敗</option>
-              </select>
+              <div class="form-group form-inline">
+                <h4>Basic</h4>
+                <lable>通貨ペア</lable>
+                <select class="form-control" id="detail-currency-pair">
+                  <option value="GBP/JPY">GBP/JPY</option>
+                  <option value="USD/JPY">USD/JPY</option>
+                </select>
+                <lable>数量</lable>
+                <input class="form-control" type="number" id="detail-amount"></input>
+                <lable>買/売</lable>
+                <select class="form-control" id="detail-buy-or-sell">
+                  <option disabled selected value></option>
+                  <option value="買">買</option>
+                  <option value="売">売</option>
+                </select>
+                <br>
+                <lable>エントリー価格</lable>
+                <input class="form-control" type="number" id="detail-entry-price"></input>
+                <lable>決済価格</lable>
+                <input class="form-control" type="number" id="detail-exit-price"></input>
+                <br>
+                <lable>エントリー日</lable>
+                <input class="form-control" type="date" id="detail-entry-date"></input>
+                <lable>決済日</lable>
+                <input class="form-control" type="date" id="detail-exit-date"></input>
+                <br>
+                <lable>成功/失敗</lable>
+                <select class="form-control" id="detail-success-or-not">
+                  <option value="success" selected>成功</option>
+                  <option value="failure">失敗</option>
+                </select>
+              </div>
               <hr>
-              <h5>プラン</h5>
-              <lable>利食価格</lable>
-              <input type="number" id="detail-target-price"></input>
-              <lable>利食pips</lable>
-              <input type="number" id="detail-profit-if-win"></input>
-              <lable>予想利益</lable>
-              <input type="number" id="detail-profit-if-win"></input>
-              <lable>損切価格</lable>
-              <input type="number" id="detail-stop-loss"></input>
-              <lable>損切pips</lable>
-              <input type="number" id="detail-pips-if-lose"></input>
-              <lable>予想損失</lable>
-              <input type="number" id="detail-loss-if-failed"></input>
-              <lable>エントリーの理由</lable>
-              <input type="text" id="detail-entry-reason"></input>
-              <h5>評価</h5>
-              <label class="radio-inline">
-                <input type="radio" name="perfect">素晴らしい（´▽｀*）ｱﾊﾊー
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="soso">普通　(0＾ー＾0）
-              </label>
-              <label class="radio-inline">
-                <input type="radio" name="bad">悪い　(ノД`)・゜・。
-              </label>
-              <lable>コメント</lable>
-              <input type="text" id="detail-comment"></input>
+              <div class="form-group form-inline">
+                <h4>Plan</h4>
+                <lable>利食価格</lable>
+                <input class="form-control" type="number" id="detail-target-price"></input>
+                <lable>利食pips</lable>
+                <input class="form-control" type="number" id="detail-profit-if-win"></input>
+                <lable>予想利益</lable>
+                <input class="form-control" type="number" id="detail-profit-if-win"></input><br>
+                <lable>損切価格</lable>
+                <input class="form-control" type="number" id="detail-stop-loss"></input>
+                <lable>損切pips</lable>
+                <input class="form-control" type="number" id="detail-pips-if-lose"></input>
+                <lable>予想損失</lable>
+                <input class="form-control" type="number" id="detail-loss-if-failed"></input><br>
+              </div>
+              <div class="form-group">
+                <lable>エントリー理由</lable>
+                <textarea class="form-control" rows="5" id="detail-entry-reason"></textarea>
+              </div>
+              <hr>
+              <h4>Evaluation</h4>
+              <div class="form-group form-inline">
+                <label class="radio-inline">
+                  <input type="radio" name="evaluation" value="perfect">素晴らしい（´▽｀*）ｱﾊﾊー
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="evaluation" value="soso">普通　(0＾ー＾0）
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="evaluation" value="bad">悪い　(ノД`)・゜・。
+                </label>
+              </div>
+              <div class="form-group">
+                <lable>コメント</lable>
+                <textarea class="form-control" rows="5" id="detail-comment"></textarea>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-success" id="detail-update" data-dismiss="modal">Save</button>
           </div>
         </div>

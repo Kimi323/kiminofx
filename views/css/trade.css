@@ -1,15 +1,29 @@
-#monthly-result-list {
+#monthly-result-div {
     border: solid #468fc091;
+    margin-right: 10px;
+    margin-left: 40px;
+    padding-left: 10px;
+    padding-top: 15px;
 }
 
 #fx-logger-logo {
-    width: 600px;
+    width: 700px;
+    height: 400px;
 }
+
+#search-area {
+    border: solid #468fc091;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 
 .btn-warning-outline {
     background-color: transparent;
     border-color: orange;
     color: gray;
+    border-width: medium;
 }
 
 .btn-danger-outline {
@@ -24,20 +38,31 @@
     color: #337ab7;
 }
 
-#search-area {
-  border-bottom: solid #468fc091;
-}
-
-#search-area label, #search-area input, #search-area select {
-  margin-left: 10px;
-  margin-right: 5px;
+label, input, select, textarea {
+  margin-right: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #input-area {
-  border-bottom: solid powderblue;
+  margin-top: 10px;
+  border-top: solid #f5afae;
+  border-bottom: solid #e89393;
   padding: 10px;
 }
 
-.col-sm-12, #result-summary {
+#result-summary-div {
+  font-size: 18px;
+}
+
+#result-summary-div span{
+  padding-right: 170px;
+}
+
+.col-sm-12 {
   padding: 10px;
+}
+
+.modal-header {
+  background-color: powderblue;
 }
