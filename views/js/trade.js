@@ -4,6 +4,7 @@ $(document).ready(function() {
     let UIController = (function() {
 
         const DOMstrings = {
+            monthlyResultTbody: '#monthly-result-tbody',
             inputCurrencyPair: '#input-currency-pair',
             inputBuyOrSell: '#input-buy-or-sell',
             inputAmount: '#input-amount',
@@ -64,11 +65,12 @@ $(document).ready(function() {
             });
             $(DOM.searchTradeBtn).click(function() {
                 controllSearchTrade();
-                setupEventListeners();
             });
 
-            $('.show-details').click(function(e) {
-                controllShowDetail(e);
+            $(DOM.monthlyResultTbody).click(function(e) {
+                if($(e.target).hasClass('show-details')) {
+                    controllShowDetail(e);
+                }
             });
 
             $(".delete-trade").click(function(e) {
@@ -121,6 +123,7 @@ $(document).ready(function() {
                         <td>${result[i].exitDate}</td>
                         <td>${result[i].profit}</td>
                         <td>${result[i].successOrNot}</td>
+                        <td style="display:none;">${result[i].insertedTime}</td>
                         <td>
                           <div class="btn-group" role="group" aria-label="example">
                             <button type="button" class="btn btn-danger-outline btn-sm delete-trade">X</button>
